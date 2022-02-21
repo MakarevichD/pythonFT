@@ -69,6 +69,13 @@ class TestAddGroup(unittest.TestCase):
             return False
         return True
 
+    def is_alert_present(self):
+        try:
+            self.wd.switch_to_alert()
+        except NoAlertPresentException as e:
+            return False
+        return True
+
     def tearDown(self):
         self.wd.quit()
 
