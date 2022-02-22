@@ -6,7 +6,10 @@ from group import Group
 
 class TestAddGroup(unittest.TestCase):
     def setUp(self):
-        self.wd = webdriver.Chrome()
+
+        options = webdriver.ChromeOptions()
+        options.add_argument("--incognito")
+        self.wd = webdriver.Chrome(options=options)
         self.wd.implicitly_wait(30)
 
     def open_homepage(self, wd):
@@ -23,6 +26,7 @@ class TestAddGroup(unittest.TestCase):
 
     def group_page(self, wd):
         wd.find_element_by_link_text("groups").click()
+        wd.implicitly_wait(120)
 
     def group_creation(self, wd, group):
         wd.find_element_by_name("new").click()
