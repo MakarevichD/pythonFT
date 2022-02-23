@@ -1,12 +1,13 @@
-from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
+from selenium import webdriver
 import unittest
-from group import Group
+from test_data.contacts import Contacts
+from test_data.contacts import Numbers
 
-class TestAddGroup(unittest.TestCase):
+
+class AddContactsTest(unittest.TestCase):
     def setUp(self):
-
         options = webdriver.ChromeOptions()
         options.add_argument("--incognito")
         self.wd = webdriver.Chrome(options=options)
@@ -24,47 +25,38 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
-    def group_page(self, wd):
-        wd.find_element_by_link_text("groups").click()
-        wd.implicitly_wait(120)
+    def add_new_contact(self, wd, contacts):
+        wd.find_element_by_link_text("add new").click()
+        wd.find_element_by_name("firstname").click()
+        wd.find_element_by_name("firstname").clear()
+        wd.find_element_by_name("firstname").send_keys(contacts.contact_name)
+        wd.find_element_by_name("lastname").click()
+        wd.find_element_by_name("lastname").clear()
+        wd.find_element_by_name("lastname").send_keys(contacts.contact_surname)
 
-    def group_creation(self, wd, group):
-        wd.find_element_by_name("new").click()
-        wd.find_element_by_name("group_name").click()
-        wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys(group.name)
-        wd.find_element_by_name("group_header").click()
-        wd.find_element_by_name("group_header").clear()
-        wd.find_element_by_name("group_header").send_keys(group.header)
-        wd.find_element_by_name("group_footer").click()
-        wd.find_element_by_name("group_footer").clear()
-        wd.find_element_by_name("group_footer").send_keys(group.footer)
-        wd.find_element_by_name("submit").click()
+    def enter_number(self, wd, contacts):
+        wd.find_element_by_name("mobile").click()
+        wd.find_element_by_name("mobile").clear()
+        wd.find_element_by_name("mobile").send_keys(contacts.mobile_num)
+        wd.find_element_by_name("work").click()
+        wd.find_element_by_name("work").clear()
+        wd.find_element_by_name("work").send_keys(contacts.work_num)
+        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
-    def return_to_group_page(self, wd):
-        wd.find_element_by_link_text("group page").click()
+    def return_to_homepage(self, wd):
+        wd.find_element_by_link_text("home page").click()
 
     def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
 
-    def test_test_add_group(self):
+    def test_new_contact_adding(self):
         wd = self.wd
         self.open_homepage(wd)
         self.login(wd, username="admin", password="secret")
-        self.group_page(wd)
-        self.group_creation(wd, Group(name="efefef", header="lolo", footer="fpdef"))
-        self.return_to_group_page(wd)
+        self.add_new_contact(wd, Contacts(contact_name="Gena", contact_surname="Babkov"))
+        self.enter_number(wd, Numbers(work_num=" ", mobile_num=" "))
+        self.return_to_homepage(wd)
         self.logout(wd)
-
-    def test_add_empty_group(self):
-        wd = self.wd
-        self.open_homepage(wd)
-        self.login(wd, username="admin", password="secret")
-        self.group_page(wd)
-        self.group_creation(wd, Group(name="", header="", footer=""))
-        self.return_to_group_page(wd)
-        self.logout(wd)
-
 
     def is_element_present(self, how, what):
         try:
