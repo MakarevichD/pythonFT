@@ -2,8 +2,8 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium import webdriver
 import unittest
-from test_for.contacts import Contacts
-from test_for.contacts import Numbers
+from contacts import Contact
+
 
 
 class AddContactsTest(unittest.TestCase):
@@ -33,8 +33,6 @@ class AddContactsTest(unittest.TestCase):
         wd.find_element_by_name("lastname").click()
         wd.find_element_by_name("lastname").clear()
         wd.find_element_by_name("lastname").send_keys(contacts.contact_surname)
-
-    def enter_number(self, wd, contacts):
         wd.find_element_by_name("mobile").click()
         wd.find_element_by_name("mobile").clear()
         wd.find_element_by_name("mobile").send_keys(contacts.mobile_num)
@@ -53,8 +51,7 @@ class AddContactsTest(unittest.TestCase):
         wd = self.wd
         self.open_homepage(wd)
         self.login(wd, username="admin", password="secret")
-        self.add_new_contact(wd, Contacts(contact_name="Gena", contact_surname="Babkov"))
-        self.enter_number(wd, Numbers(work_num=" ", mobile_num=" "))
+        self.add_new_contact(wd, Contact(contact_name="Gena", contact_surname="Babkov", work_num="432 4432", mobile_num="34 99800 "))
         self.return_to_homepage(wd)
         self.logout(wd)
 
