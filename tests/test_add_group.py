@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
-from test_for.group import Group
+from group import Group
 
 class TestAddGroup(unittest.TestCase):
     def setUp(self):
