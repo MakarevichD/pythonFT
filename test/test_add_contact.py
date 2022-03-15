@@ -1,6 +1,6 @@
 import pytest
 from contact import Contact
-from fixture.contact import ContactWriter
+from dew.contact import ContactWriter
 
 
 @pytest.fixture()
