@@ -1,4 +1,3 @@
-from selenium import webdriver
 
 
 class ContactHelper:
@@ -24,6 +23,20 @@ class ContactHelper:
         wd.find_element_by_name("work").send_keys(contacts.work_num)
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
         self.return_to_homepage()
+
+    def delete_first_contact(self):
+        wd = self.app.wd
+        self.app.open_homepage()
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("/html/body/div/div[4]/form[2]/div[2]/input").click()
+        wd.switch_to.alert.accept()
+
+    def delete_all_contacts(self):
+        wd = self.app.wd
+        self.app.open_homepage()
+        wd.find_element_by_xpath("// *[ @ id = 'MassCB']").click()
+        wd.find_element_by_xpath("/html/body/div/div[4]/form[2]/div[2]/input").click()
+        wd.switch_to.alert.accept()
 
     def return_to_homepage(self):
         wd = self.app.wd
