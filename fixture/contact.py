@@ -1,5 +1,3 @@
-
-
 class ContactHelper:
 
     def __init__(self, app):
@@ -37,6 +35,22 @@ class ContactHelper:
         wd.find_element_by_xpath("// *[ @ id = 'MassCB']").click()
         wd.find_element_by_xpath("/html/body/div/div[4]/form[2]/div[2]/input").click()
         wd.switch_to.alert.accept()
+
+    def contact_modificate(self,contacts):
+        wd = self.app.wd
+        self.app.open_homepage()
+        wd.find_element_by_xpath("//a[@href='edit.php?id=14']").click()
+        wd.find_element_by_name("firstname").click()
+        wd.find_element_by_name("firstname").clear()
+        wd.find_element_by_name("firstname").send_keys(contacts.contact_name)
+        wd.find_element_by_name("lastname").click()
+        wd.find_element_by_name("lastname").clear()
+        wd.find_element_by_name("lastname").send_keys(contacts.contact_surname)
+        wd.find_element_by_name("mobile").click()
+        wd.find_element_by_name("mobile").clear()
+        wd.find_element_by_name("mobile").send_keys(contacts.mobile_num)
+        wd.find_element_by_xpath("//input[@name ='update']").click()
+        self.app.open_homepage()
 
     def return_to_homepage(self):
         wd = self.app.wd
