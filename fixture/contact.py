@@ -26,20 +26,20 @@ class ContactHelper:
         wd = self.app.wd
         self.app.open_homepage()
         wd.find_element_by_name("selected[]").click()
-        wd.find_element_by_xpath("/html/body/div/div[4]/form[2]/div[2]/input").click()
+        wd.find_element_by_xpath("//input[@onclick = 'DeleteSel()']").click()
         wd.switch_to.alert.accept()
 
     def delete_all_contacts(self):
         wd = self.app.wd
         self.app.open_homepage()
         wd.find_element_by_xpath("// *[ @ id = 'MassCB']").click()
-        wd.find_element_by_xpath("/html/body/div/div[4]/form[2]/div[2]/input").click()
+        wd.find_element_by_xpath("//input[@onclick = 'DeleteSel()']").click()
         wd.switch_to.alert.accept()
 
     def contact_modificate(self,contacts):
         wd = self.app.wd
         self.app.open_homepage()
-        wd.find_element_by_xpath("//a[@href='edit.php?id=14']").click()
+        wd.find_element_by_xpath("//img[@title = 'Edit']").click()
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(contacts.contact_name)
