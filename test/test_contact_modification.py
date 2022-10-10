@@ -2,4 +2,8 @@ from model.contact import Contact
 
 
 def test_contact_editor(app):
-    app.contact.contact_modificate(Contact(contact_name="Igorek", contact_surname="Bambucha", mobile_num="221112321113333", work_num="33221"))
+    if app.contact.contacts_count() == 0:
+        app.contact.add_new_contact(Contact(contact_surname="valerkin", contact_name="ignat",
+                                            mobile_num="22123456789", work_num="900900"))
+
+    app.contact.edit_contact(Contact(contact_name="Igorek", contact_surname="Bambucha", mobile_num="221112321113333", work_num="33221"))

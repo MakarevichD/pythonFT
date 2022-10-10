@@ -6,3 +6,6 @@ def test_group_modificate_name(app):
 
 def test_group_modificate_header(app):
     app.group.modify_first_group(Group(header="New header"))
+
+def test_group_modificate_footer(app):
+    app.group.modify_first_group(Group(footer="New footer"))

@@ -49,6 +49,11 @@ class GroupHelper:
         wd.find_element_by_xpath("//input[@value ='Update']").click()
         self.return_to_group_page()
 
+    def group_count(self):
+        wd = self.app.wd
+        self.group_page()
+        return len(wd.find_elements_by_name('selected[]'))
+
     def return_to_group_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("group page").click()
