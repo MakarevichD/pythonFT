@@ -3,10 +3,11 @@ class GroupHelper:
     def __init__(self, app):
         self.app = app
 
-    def group_page(self):
+    def open_group_page(self):
         wd = self.app.wd
-        wd.find_element_by_xpath("//a[@href = 'group.php']").click()
-        wd.implicitly_wait(30)
+        if not (wd.current_url.endswith("/group.php") and len(wd.find_elements_by_name('new'))>0):
+            wd.find_element_by_link_text("groups").click()
+
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
@@ -23,7 +24,7 @@ class GroupHelper:
 
     def creation(self, group):
         wd = self.app.wd
-        self.group_page()
+        self.open_group_page()
         wd.find_element_by_xpath("//input[@value = 'New group']").click()
         self.fill_group_form(group)
         wd.find_element_by_name("submit").click()
@@ -31,7 +32,7 @@ class GroupHelper:
 
     def delete_first_group(self):
         wd = self.app.wd
-        self.group_page()
+        self.open_group_page()
         self.select_first_group()
         wd.find_element_by_xpath("//input[@value ='Delete group(s)']").click()
         self.return_to_group_page()
@@ -42,7 +43,7 @@ class GroupHelper:
 
     def modify_first_group(self, new_group_data):
         wd = self.app.wd
-        self.group_page()
+        self.open_group_page()
         self.select_first_group()
         wd.find_element_by_xpath("//input[@value ='Edit group']").click()
         self.fill_group_form(new_group_data)
@@ -51,7 +52,7 @@ class GroupHelper:
 
     def group_count(self):
         wd = self.app.wd
-        self.group_page()
+        self.open_group_page()
         return len(wd.find_elements_by_name('selected[]'))
 
     def return_to_group_page(self):

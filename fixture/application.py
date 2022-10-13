@@ -9,7 +9,6 @@ class Application:
         options = webdriver.ChromeOptions()
         options.add_argument("--incognito")
         self.wd = webdriver.Chrome(options=options)
-        self.wd.implicitly_wait(30)
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
