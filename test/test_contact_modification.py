@@ -6,4 +6,4 @@ def test_contact_editor(app):
         app.contact.add_new_contact(Contact(contact_surname="valerkin", contact_name="ignat",
                                             mobile_num="22123456789", work_num="900900"))
 
-    app.contact.edit_contact(Contact(contact_name="Igorek", contact_surname="Bambucha", mobile_num="221112321113333", work_num="33221"))
+    app.contact.edit_contact(Contact(contact_name="Kolya", contact_surname="Petrov", mobile_num="8098912", work_num="1099000"))

@@ -7,6 +7,7 @@ class ContactHelper:
         wd = self.app.wd
         if not (wd.current_url.endswith("//index.php") and len(wd.find_elements_by_name('delete')) > 0):
             wd.find_element_by_xpath("//a[@href='./']")
+
     def add_new_contact(self, contacts):
         wd = self.app.wd
         self.open_contact_page()
@@ -44,11 +45,27 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@onclick = 'DeleteSel()']").click()
         wd.switch_to.alert.accept()
 
+    def edit_contact_form(self, contacts):
+        wd = self.app.wd
+        wd.find_element_by_name("firstname").click()
+        wd.find_element_by_name("firstname").clear()
+        wd.find_element_by_name("firstname").send_keys(contacts.contact_name)
+        wd.find_element_by_name("lastname").click()
+        wd.find_element_by_name("lastname").clear()
+        wd.find_element_by_name("lastname").send_keys(contacts.contact_surname)
+        wd.find_element_by_name("mobile").click()
+        wd.find_element_by_name("mobile").clear()
+        wd.find_element_by_name("mobile").send_keys(contacts.mobile_num)
+        wd.find_element_by_name("work").click()
+        wd.find_element_by_name("work").clear()
+        wd.find_element_by_name("work").send_keys(contacts.work_num)
+
     def edit_contact(self, contacts):
         wd = self.app.wd
+        self.open_contact_page()
         wd.find_element_by_xpath("//img[@title='Edit']").click()
-        self.fill_contact_form(contacts)
-        wd.find_elements_by_xpath("//input[@value='Update']").click()
+        self.edit_contact_form(contacts)
+        wd.find_element_by_xpath("//input[@value='Update']").click()
 
     def contacts_count(self):
         wd = self.app.wd
