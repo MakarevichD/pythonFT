@@ -11,12 +11,13 @@ class ContactHelper:
     def add_new_contact(self, contacts):
         wd = self.app.wd
         self.open_contact_page()
+        wd.find_element_by_link_text("add new").click()
         self.fill_contact_form(contacts)
+        wd.find_element_by_xpath("//input[@value='Enter']").click()
         self.return_to_homepage()
 
     def fill_contact_form(self, contacts):
         wd = self.app.wd
-        wd.find_element_by_link_text("add new").click()
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(contacts.contact_name)
@@ -29,7 +30,6 @@ class ContactHelper:
         wd.find_element_by_name("work").click()
         wd.find_element_by_name("work").clear()
         wd.find_element_by_name("work").send_keys(contacts.work_num)
-        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
     def delete_first_contact(self):
         wd = self.app.wd
@@ -45,26 +45,11 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@onclick = 'DeleteSel()']").click()
         wd.switch_to.alert.accept()
 
-    def edit_contact_form(self, contacts):
-        wd = self.app.wd
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contacts.contact_name)
-        wd.find_element_by_name("lastname").click()
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(contacts.contact_surname)
-        wd.find_element_by_name("mobile").click()
-        wd.find_element_by_name("mobile").clear()
-        wd.find_element_by_name("mobile").send_keys(contacts.mobile_num)
-        wd.find_element_by_name("work").click()
-        wd.find_element_by_name("work").clear()
-        wd.find_element_by_name("work").send_keys(contacts.work_num)
-
     def edit_contact(self, contacts):
         wd = self.app.wd
         self.open_contact_page()
         wd.find_element_by_xpath("//img[@title='Edit']").click()
-        self.edit_contact_form(contacts)
+        self.fill_contact_form(contacts)
         wd.find_element_by_xpath("//input[@value='Update']").click()
 
     def contacts_count(self):
