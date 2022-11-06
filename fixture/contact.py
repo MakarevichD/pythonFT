@@ -58,6 +58,17 @@ class ContactHelper:
         self.open_contact_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.open_contact_page()
+        contacts = []
+        for element in wd.find_elements_by_name("entry"):
+            name = element.find_element_by_xpath("td[3]").text
+            surname = element.find_element_by_xpath("td[2]").text
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            contacts.append(Contact(contact_name=name, contact_surname=surname, id=id))
+        return contacts
+
     def return_to_homepage(self):
         wd = self.app.wd
         wd.find_element_by_link_text("home page").click()

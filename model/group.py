@@ -1,5 +1,6 @@
 from sys import maxsize
 
+
 class Group:
 
     def __init__(self, name=None, header=None, footer=None, id=None):
@@ -17,5 +18,5 @@ class Group:
     def id_or_max(self):
         if self.id:
             return int(self.id)
-        else: return maxsize
-
+        else:
+            return maxsize
