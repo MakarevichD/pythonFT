@@ -1,3 +1,4 @@
+from model.contact import Contact
 class ContactHelper:
 
     def __init__(self, app):
@@ -5,8 +6,8 @@ class ContactHelper:
 
     def open_contact_page(self):
         wd = self.app.wd
-        if not (wd.current_url.endswith("//index.php") and len(wd.find_elements_by_name('delete')) > 0):
-            wd.find_element_by_xpath("//a[@href='./']")
+        if not (wd.current_url.endswith("//index.php") and len(wd.find_elements_by_name('Delete')) > 0):
+            wd.find_element_by_xpath("//a[@href='./']").click()
 
     def add_new_contact(self, contacts):
         wd = self.app.wd
@@ -41,7 +42,7 @@ class ContactHelper:
     def delete_all_contacts(self):
         wd = self.app.wd
         self.open_contact_page()
-        wd.find_element_by_xpath("// *[ @ id = 'MassCB']").click()
+        wd.find_element_by_xpath("// *[@id = 'MassCB']").click()
         wd.find_element_by_xpath("//input[@onclick = 'DeleteSel()']").click()
         wd.switch_to.alert.accept()
 

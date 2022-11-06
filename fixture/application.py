@@ -15,14 +15,16 @@ class Application:
 
     def open_homepage(self):
         wd = self.wd
-        wd.get("http://localhost/addressbook/")
+        if not wd.current_url.endswith("/addressbook"):
+            wd.get("http://localhost/addressbook")
+            return wd
 
     def destroy(self):
         self.wd.quit()
 
     def is_valid(self):
         try:
-            self.wd.current_url()
+            self.wd.current_url
             return True
         except:
             return False
