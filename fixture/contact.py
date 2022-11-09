@@ -1,4 +1,6 @@
 from model.contact import Contact
+
+
 class ContactHelper:
 
     def __init__(self, app):
@@ -33,13 +35,16 @@ class ContactHelper:
         wd.find_element_by_name("work").clear()
         wd.find_element_by_name("work").send_keys(contacts.work_num)
 
-    def delete_first_contact(self):
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
         self.open_contact_page()
-        wd.find_element_by_name("selected[]").click()
+        self.select_contact_by_index(index)
         wd.find_element_by_xpath("//input[@onclick = 'DeleteSel()']").click()
         wd.switch_to.alert.accept()
         self.contact_cache = None
+
+    def delete_first_contact(self):
+        self.edit_contact_by_index(0)
 
     def delete_all_contacts(self):
         wd = self.app.wd
@@ -49,13 +54,26 @@ class ContactHelper:
         wd.switch_to.alert.accept()
         self.contact_cache = None
 
-    def edit_contact(self, contacts):
+    def select_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
+
+    def select_contact(self):
+        wd =self.app.wd
+        wd.find_element_by_name("selected[]").click()
+
+    def edit_contact_by_index(self, index, contacts):
         wd = self.app.wd
         self.open_contact_page()
-        wd.find_element_by_xpath("//img[@title='Edit']").click()
+        self.select_contact_by_index(index)
+        wd.find_elements_by_css_selector("img[alt='Edit']")[index].click()
         self.fill_contact_form(contacts)
         wd.find_element_by_xpath("//input[@value='Update']").click()
+        self.return_to_homepage()
         self.contact_cache = None
+
+    def edit_contact(self):
+        self.edit_contact_by_index(0)
 
     def contacts_count(self):
         wd = self.app.wd
@@ -74,7 +92,7 @@ class ContactHelper:
                 surname = element.find_element_by_xpath("td[2]").text
                 id = element.find_element_by_name("selected[]").get_attribute("value")
                 self.contact_cache.append(Contact(contact_name=name, contact_surname=surname, id=id))
-            return list(self.contact_cache)
+        return list(self.contact_cache)
 
     def return_to_homepage(self):
         wd = self.app.wd
