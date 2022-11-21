@@ -10,8 +10,6 @@ def test_contact_editor(app):
     index = randrange(len(old_contacts))
     contact = Contact(contact_name="Kolya", contact_surname="Petrov", mobile_num="8098912", work_num="1099000")
     contact.id = old_contacts[index].id
-    contact.contact_name = old_contacts[index].contact_name
-    contact.contact_surname = old_contacts[index].contact_surname
     app.contact.edit_contact_by_index(index, contact)
     new_contacts = app.contact.get_contact_list()
     assert len(old_contacts) == len(new_contacts)
