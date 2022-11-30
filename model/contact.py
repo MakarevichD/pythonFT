@@ -5,7 +5,7 @@ class Contact:
 
     def __init__(self, contact_name=None, contact_surname=None, contact_middle=None, contact_nickname=None,
                  contact_title=None, contact_company=None, all_phones_from_home_page=None, work_num=None,
-                 all_emails_from_home_page=None,mobile_num=None, home_num=None, fax_num=None, contact_email=None,
+                 all_emails_from_home_page=None, mobile_num=None, home_num=None, fax_num=None, contact_email=None,
                  contact_email_2=None, contact_address=None, id=None):
         self.contact_name = contact_name
         self.contact_surname = contact_surname
@@ -25,11 +25,19 @@ class Contact:
         self.id = id
 
     def __repr__(self):
-        return "%s:%s:%s" % (self.contact_name, self.contact_surname, self.id)
+        return "%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s" % (
+            self.contact_name, self.contact_surname, self.id, self.home_num, self.work_num, self.mobile_num,
+            self.contact_address, self.contact_company, self.contact_title, self.contact_email,
+            self.contact_email_2, self.contact_middle, self.fax_num, self.contact_nickname)
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id or self.id == other.id is None) \
-               and self.contact_name == other.contact_name or self.contact_surname == other.contact_surname or self.id == self.id
+               and self.contact_name == other.contact_name or self.contact_surname == other.contact_surname or self.id == self.id \
+               or self.home_num == other.home_num or self.work_num == other.work_num or self.mobile_num == other.mobile_num \
+               or self.contact_address == other.contact_address or self.contact_company == other.contact_company \
+               or self.contact_title == other.contact_title or self.contact_email == other.contact_email \
+               or self.contact_email_2 == other.contact_email_2 or self.contact_middle == other.contact_middle \
+               or self.fax_num == other.fax_num or self.contact_nickname == other.contact_nickname
 
     def id_or_max(self):
         if self.id:

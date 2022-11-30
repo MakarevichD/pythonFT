@@ -136,15 +136,17 @@ class ContactHelper:
         self.open_contact_to_edit_by_index(index)
         contact_name = wd.find_element_by_name("firstname").get_attribute("value")
         contact_surname = wd.find_element_by_name("lastname").get_attribute("value")
+        contact_middle = wd.find_element_by_name("middlename").get_attribute("value")
+        contact_nickname =  wd.find_element_by_name("nickname").get_attribute("value")
         id = wd.find_element_by_name("id").get_attribute("value")
         home_num = wd.find_element_by_name("home").get_attribute("value")
         work_num = wd.find_element_by_name("work").get_attribute("value")
         mobile_num = wd.find_element_by_name("mobile").get_attribute("value")
+        fax_num = wd.find_element_by_name("fax").get_attribute("value")
         address_data = wd.find_element_by_name("address").get_attribute("value")
         email_data = wd.find_element_by_name("email").get_attribute("value")
         email2_data = wd.find_element_by_name("email2").get_attribute("value")
 
-        # second_num = wd.find_element_by_name("fax").get_attribute("value")
         return Contact(id=id, mobile_num=mobile_num, work_num=work_num,
                        home_num=home_num, contact_name=contact_name, contact_surname=contact_surname,
                        contact_address=address_data,contact_email=email_data, contact_email_2=email2_data)
