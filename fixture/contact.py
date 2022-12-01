@@ -144,12 +144,15 @@ class ContactHelper:
         mobile_num = wd.find_element_by_name("mobile").get_attribute("value")
         fax_num = wd.find_element_by_name("fax").get_attribute("value")
         address_data = wd.find_element_by_name("address").get_attribute("value")
+        contact_company = wd.find_element_by_name("company").get_attribute("value")
         email_data = wd.find_element_by_name("email").get_attribute("value")
         email2_data = wd.find_element_by_name("email2").get_attribute("value")
 
         return Contact(id=id, mobile_num=mobile_num, work_num=work_num,
-                       home_num=home_num, contact_name=contact_name, contact_surname=contact_surname,
-                       contact_address=address_data,contact_email=email_data, contact_email_2=email2_data)
+                       home_num=home_num, contact_name=contact_name, contact_surname=contact_surname,fax_num=fax_num,
+                       contact_address=address_data,contact_email=email_data, contact_email_2=email2_data,
+                       contact_middle=contact_middle, contact_nickname=contact_nickname,contact_company=contact_company,
+                       )
 
     def get_contact_info_from_view_page(self, index):
         wd = self.app.wd

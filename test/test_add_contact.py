@@ -23,19 +23,19 @@ def random_email(self, maxlen):
 
 
 testdata = [Contact(
-    contact_name=random_string("contact_name", 10),
-    contact_surname=random_string("contact_surname", 15),
+    contact_name=random_string("contact_name", 6),
+    contact_surname=random_string("contact_surname", 8),
     contact_middle=random_string("contact_middle", 8),
-    contact_nickname=random_string("contact_nickname", 15),
+    contact_nickname=random_string("contact_nickname", 5),
     home_num=random_phones("+", 10),
     mobile_num=random_phones("+", 10),
     work_num=random_phones("+", 10),
     fax_num=random_phones("+", 10),
     contact_address=random_string("contact_address", 7),
-    contact_company=random_string("contact_company", 15),
-    contact_title=random_string("contact_title", 15),
+    contact_company=random_string("contact_company", 6),
+    contact_title=random_string("contact_title", 7),
     contact_email=random_email("contact_email", 6),
-    contact_email_2=random_email("contact_email_2", 15))
+    contact_email_2=random_email("contact_email_2", 4))
 
     for i in range(1)
 ]
