@@ -26,6 +26,7 @@ class Application:
             return wd
 
     def destroy(self):
+        wd = self.wd
         self.wd.quit()
 
     def is_valid(self):
