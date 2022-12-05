@@ -1,0 +1,143 @@
+[
+  {
+    "py/object": "model.contact.Contact",
+    "contact_name": {
+      "py/tuple": [
+        "contact_name492ki2"
+      ]
+    },
+    "contact_surname": {
+      "py/tuple": [
+        "contact_surnameQ583T4e9"
+      ]
+    },
+    "contact_middle": {
+      "py/tuple": [
+        "contact_middle5q84EB90"
+      ]
+    },
+    "contact_nickname": {
+      "py/tuple": [
+        "contact_nicknamel1648"
+      ]
+    },
+    "contact_title": {
+      "py/tuple": [
+        "contact_titleq109153"
+      ]
+    },
+    "contact_company": {
+      "py/tuple": [
+        "contact_company5V48w7"
+      ]
+    },
+    "work_num": "+4681609830",
+    "mobile_num": "+7348341342",
+    "home_num": "+5673169065",
+    "fax_num": "+8942379737",
+    "contact_email": "qmmsZI@list.com",
+    "contact_email_2": "rSjP@mail.ru",
+    "contact_address": {
+      "py/tuple": [
+        "contact_address5usiN97"
+      ]
+    },
+    "all_phones_from_home_page": null,
+    "all_emails_from_home_page": null,
+    "id": null
+  },
+  {
+    "py/object": "model.contact.Contact",
+    "contact_name": {
+      "py/tuple": [
+        "contact_name1sA4cw"
+      ]
+    },
+    "contact_surname": {
+      "py/tuple": [
+        "contact_surname57t4718p"
+      ]
+    },
+    "contact_middle": {
+      "py/tuple": [
+        "contact_middle67402lP5"
+      ]
+    },
+    "contact_nickname": {
+      "py/tuple": [
+        "contact_nickname832P0"
+      ]
+    },
+    "contact_title": {
+      "py/tuple": [
+        "contact_title0s5X074"
+      ]
+    },
+    "contact_company": {
+      "py/tuple": [
+        "contact_company315776"
+      ]
+    },
+    "work_num": "+1218756829",
+    "mobile_num": "+2158942791",
+    "home_num": "+0516033839",
+    "fax_num": "+4348773686",
+    "contact_email": "lxzwZW@gmail.com",
+    "contact_email_2": "DGiR@gmail.com",
+    "contact_address": {
+      "py/tuple": [
+        "contact_addressr95J1A8"
+      ]
+    },
+    "all_phones_from_home_page": null,
+    "all_emails_from_home_page": null,
+    "id": null
+  },
+  {
+    "py/object": "model.contact.Contact",
+    "contact_name": {
+      "py/tuple": [
+        "contact_nameL45x0g"
+      ]
+    },
+    "contact_surname": {
+      "py/tuple": [
+        "contact_surnameJs2209P1"
+      ]
+    },
+    "contact_middle": {
+      "py/tuple": [
+        "contact_middleL4225983"
+      ]
+    },
+    "contact_nickname": {
+      "py/tuple": [
+        "contact_nickname7dY30"
+      ]
+    },
+    "contact_title": {
+      "py/tuple": [
+        "contact_title0W20w66"
+      ]
+    },
+    "contact_company": {
+      "py/tuple": [
+        "contact_company744F18"
+      ]
+    },
+    "work_num": "+5364114906",
+    "mobile_num": "+8470103477",
+    "home_num": "+3385179422",
+    "fax_num": "+4457479505",
+    "contact_email": "lnnwNX@gmail.com",
+    "contact_email_2": "KxrE@list.com",
+    "contact_address": {
+      "py/tuple": [
+        "contact_address10ej6p8"
+      ]
+    },
+    "all_phones_from_home_page": null,
+    "all_emails_from_home_page": null,
+    "id": null
+  }
+]
