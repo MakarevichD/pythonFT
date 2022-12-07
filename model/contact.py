@@ -26,9 +26,9 @@ class Contact:
 
     def __repr__(self):
         return "%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s" % (
-            self.contact_name, self.contact_surname, self.id, self.home_num, self.work_num, self.mobile_num,
-            self.contact_address, self.contact_company, self.contact_title, self.contact_email,
-            self.contact_email_2, self.contact_middle, self.fax_num, self.contact_nickname)
+            self.id,self.contact_name, self.contact_surname, self.home_num, self.work_num, self.mobile_num,
+            self.contact_address, self.contact_company, self.contact_title, self.contact_email,self.contact_email_2,
+            self.contact_middle, self.fax_num, self.contact_nickname)
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id or self.id == other.id is None) \
