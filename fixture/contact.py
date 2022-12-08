@@ -1,5 +1,4 @@
 import re
-
 from model.contact import Contact
 
 
@@ -73,6 +72,14 @@ class ContactHelper:
         wd.switch_to.alert.accept()
         self.contact_cache = None
 
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.select_contact_by_id(id)
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to.alert.accept()
+        wd.find_element_by_xpath("//div[@class='msgbox']")
+        self.contact_cache = None
+
     def delete_first_contact(self):
         self.edit_contact_by_index(0)
 
@@ -88,9 +95,25 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
 
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+
+
     def select_contact(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
+
+    def add_selected_contact_to_group_by_id(self,contact_id, group_id ):
+        wd = self.app.wd
+        self.open_contact_page()
+        self.select_contact_by_id(contact_id)
+        wd.find_element_by_name("to_group").click()
+        Select(wd.find_element_by_name("to_group")).select_by_value(group_id)
+        wd.find_element_by_name("add").click()
+        self.open_contact_page()
+        self.contact_cache = None
+
 
     def edit_contact_by_index(self, index, contacts):
         wd = self.app.wd
