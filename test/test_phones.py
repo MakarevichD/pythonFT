@@ -1,4 +1,5 @@
 import re
+from model.contact import Contact
 
 
 def test_phones_on_home_page(app):
@@ -26,6 +27,21 @@ def test_all_contact_fields(app):
     assert contact_from_home_page.all_emails_from_home_page == merge_emails_like_on_main_page(contact_from_edit_page)
 
 
+def test_phones_on_home_page_via_db(app, database):
+    contacts_from_home_page = sorted(app.contact.get_contact_list(), key=Contact.id_or_max)
+    contacts_from_database = sorted(database.get_contact_list(), key=Contact.id_or_max)
+    for contact_from_home_page in contacts_from_home_page:
+        for contact_from_database in contacts_from_database:
+            if contact_from_home_page.id == contact_from_database.id:
+                assert contact_from_home_page.contact_name == contact_from_database.contact_name
+                assert contact_from_home_page.contact_surname == contact_from_database.contact_surname
+                assert contact_from_home_page.contact_address == contact_from_database.contact_address
+                assert contact_from_home_page.all_emails_from_home_page == merge_emails_like_on_main_page(
+                    contact_from_database)
+                assert contact_from_home_page.all_phones_from_home_page == merge_phones_like_on_main_page(
+                    contact_from_database)
+
+
 def clear(s):
     return re.sub("[() -]", "", s)
 
@@ -36,7 +52,8 @@ def merge_phones_like_on_main_page(contact):
                                 filter(lambda x: x is not None,
                                        [contact.home_num, contact.mobile_num, contact.work_num]))))
 
+
 def merge_emails_like_on_main_page(contact):
     return "\n".join(filter(lambda x: x != "",
-                                filter(lambda x: x is not None,
-                                       [contact.contact_email, contact.contact_email_2])))
+                            filter(lambda x: x is not None,
+                                   [contact.contact_email, contact.contact_email_2])))
