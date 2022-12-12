@@ -11,10 +11,10 @@ def test_group_modify(app, database, check_ui):
     group.id = old_groups[index].id
     app.group.modify_group_by_index(index, group)
     new_groups = database.get_group_list()
-    assert len(old_groups) == len(new_groups)
     old_groups[index] = group
+    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
     if check_ui:
-        assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
+        assert sorted(new_groups, key=Group.id_or_max) == sorted(app.group.get_group_list(), key=Group.id_or_max)
 
 # def test_group_modificate_header(app):
 #    old_groups = app.group.get_group_list()
