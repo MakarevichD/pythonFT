@@ -26,7 +26,7 @@ class ORMFixture:
 
     def __init__(self, host, name, user, password):
         self.db.bind('mysql', host=host, database=name, user=user,
-                     password=password)#, conv=decoders)  # with this converter i've got str instead of datetime
+                     password=password,conv=decoders)  # with this converter i've got str instead of datetime
         self.db.generate_mapping()
         sql_debug(True)
 
@@ -49,7 +49,7 @@ class ORMFixture:
         return self.convert_contacts_to_model(orm_group.contacts)
 
     @db_session
-    def get_contacts_not_in_groups(self, group):
+    def get_contacts_not_in_group(self, group):
         orm_group = list(select(g for g in ORMFixture.ORMGroup if g.id == group.id))[0]
         return self.convert_contacts_to_model(
             select(c for c in ORMFixture.ORMContact if c.deprecated is None and orm_group not in c.groups))
@@ -65,3 +65,7 @@ class ORMFixture:
     @db_session
     def get_groups_with_contacts(self, group):
         orm_group = self.convert_groups_to_model(list(select(g for g in ORMFixture.ORMGroup if g.id == group.id)))
+
+    @db_session
+    def get_contacts_with_groups(self, contact):
+        orm_contact = self.convert_contacts_to_model(list(select(g for g in ORMFixture.ORMGroup if g.id == contact.id)))

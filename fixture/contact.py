@@ -1,4 +1,5 @@
 import re
+from selenium.webdriver.support.select import Select
 from model.contact import Contact
 
 
@@ -91,6 +92,12 @@ class ContactHelper:
         wd.switch_to.alert.accept()
         self.contact_cache = None
 
+    def delete_contact_from_group(self, contact, group):
+        Select(self.wd.find_element_by_name('group')).select_by_value(group.id)
+        self.select_contact_by_id(contact.id)
+        self.wd.find_element_by_name("remove").click()
+        self.open_contact_page()
+
     def select_contact_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
@@ -104,15 +111,34 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
 
-    def add_selected_contact_to_group_by_id(self,contact_id, group_id ):
+    def add_selected_contact_to_group(self,contact, group ):
         wd = self.app.wd
-        self.open_contact_page()
-        self.select_contact_by_id(contact_id)
-        wd.find_element_by_name("to_group").click()
-        Select(wd.find_element_by_name("to_group")).select_by_value(group_id)
-        wd.find_element_by_name("add").click()
+        self.select_contact_by_id(contact.id)
+        Select(wd.find_element_by_name("to_group")).select_by_value(group.id)
+        wd.find_element_by_css_selector("input[value='Add to']").click()
         self.open_contact_page()
         self.contact_cache = None
+
+
+    def create_contact_for_group(self, contacts, group=None):
+        self.open_contact_page()
+        self.wd.find_element_by_name("add new").click()
+        self.fill_contact_to_group_form(contacts, group)
+        self.wd.find_element_by_name("submit").click()
+        self.open_contact_page()
+        self.contact_cache = None
+
+    def change_field_value(self, field, text):
+        if text is not None:
+            self.wd.find_element_by_name(field).click()
+            self.wd.find_element_by_name(field).clear()
+            self.wd.find_element_by_name(field).send_keys(text)
+
+    def fill_contact_to_group_form(self, contacts, group=None):
+        self.change_field_value("firstname", contacts.contact_name)
+        self.change_field_value("lastname", contacts.contact_surname)
+        if group:
+            Select(self.wd.find_element_by_name('new_group')).select_by_value(group.id)
 
 
     def edit_contact_by_index(self, index, contacts):
